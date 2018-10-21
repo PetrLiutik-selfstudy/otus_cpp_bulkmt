@@ -22,6 +22,7 @@ add_executable(${PROJECT_NAME} main.cpp
                                ../inc/FileWriter.h
                                ../inc/IObservable.h
                                ../inc/IStreamWriter.h
+                               ../inc/ThreadPool.h
                                ../inc/ver.h)
 
 configure_file(version.h.in ${PROJECT_SOURCE_DIR}/version.h)
