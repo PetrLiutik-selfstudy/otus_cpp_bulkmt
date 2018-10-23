@@ -6,10 +6,12 @@
 namespace bulk {
 
 void ConsoleWriter::write(const std::time_t&, const std::vector<std::string>& bulk) {
-  os_ << "bulk: ";
-  for(const auto &it : bulk) {
-    os_ << it << (&it != &bulk.back() ? ", " : "\n");
-  }
+  add_job([=](){
+    os_ << "bulk: ";
+    for(const auto &it : bulk) {
+      os_ << it << (&it != &bulk.back() ? ", " : "\n");
+    }
+  });
 }
 
 } // namespace bulk.

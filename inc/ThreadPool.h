@@ -98,7 +98,7 @@ class ThreadPool {
     }
 
 
-    std::atomic_bool                  stop_;
+    bool                              stop_;
     std::mutex                        job_mutex_;
     std::condition_variable           job_avail_;
     std::queue<std::function<void()>> jobs_;

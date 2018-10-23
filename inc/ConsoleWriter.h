@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "../inc/IStreamWriter.h"
+#include "../inc/ThreadPool.h"
 
 #include <iostream>
 #include <ostream>
@@ -10,7 +11,7 @@ namespace bulk {
 /**
  * @brief Класс вывода блока команд в консоль.
  */
-class ConsoleWriter : public IStreamWriter {
+class ConsoleWriter : public IStreamWriter, public ThreadPool<> {
   public:
     /**
      * @brief Консруктор.
@@ -19,7 +20,9 @@ class ConsoleWriter : public IStreamWriter {
     explicit ConsoleWriter(std::ostream& os = std::cout) : os_(os) {
     }
 
-    ~ConsoleWriter() override = default;
+    ~ConsoleWriter() override {
+      stop();
+    }
 
     /**
      * @brief Запись блока команд в поток.

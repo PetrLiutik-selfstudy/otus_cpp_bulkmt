@@ -7,6 +7,8 @@
 
 #include <iostream>
 
+#include <sstream>
+
 
 int main(int argc, char const *argv[])
 {
@@ -26,6 +28,27 @@ int main(int argc, char const *argv[])
     return EXIT_FAILURE;
   }
 
+  std::stringstream ss;
+  ss << "cmd1\n";
+  ss << "cmd2\n";
+  ss << "cmd3\n";
+  ss << "cmd4\n";
+  ss << "cmd5\n";
+  ss << "{\n";
+  ss << "cmd6\n";
+  ss << "{\n";
+  ss << "cmd7\n";
+  ss << "{\n";
+  ss << "cmd8\n";
+  ss << "cmd9\n";
+  ss << "}\n";
+  ss << "cmd10\n";
+  ss << "}\n";
+  ss << "cmd11\n";
+  ss << "}\n";
+  ss << "cmd12\n";
+  ss << "cmd13\n";
+
 
   bulk::CmdProcessor cmd_processor(static_cast<size_t>(bulk_size));
 
@@ -35,7 +58,7 @@ int main(int argc, char const *argv[])
   cmd_processor.subscribe(file_writer);
   cmd_processor.subscribe(console_writer);
 
-  cmd_processor.process(std::cin);
+  cmd_processor.process(ss);
 
   cmd_processor.unsubscribe(console_writer);
   cmd_processor.unsubscribe(file_writer);
