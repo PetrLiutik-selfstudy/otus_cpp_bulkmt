@@ -4,6 +4,7 @@
 #include "../inc/ThreadPool.h"
 
 #include <iostream>
+#include <map>
 #include <ostream>
 
 namespace bulk {
@@ -31,9 +32,16 @@ class ConsoleWriter : public IStreamWriter, public ThreadPool<> {
      */
     void write(const std::time_t& time, const std::vector<std::string>& bulk) final;
 
+    /**
+     * @brief Дать метрики работы потоков.
+     * @return метрики по каждому из потоков.
+     */
+    std::map<std::thread::id, Metrics> get_metrics() final;
+
   private:
-    /// Поток для вывода.
     std::ostream& os_;
+    std::mutex metrics_guard_;
+    std::map<std::thread::id, Metrics> threads_metrics_;
 };
 
 } // namespace bulk.

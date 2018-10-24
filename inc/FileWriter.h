@@ -3,6 +3,8 @@
 #include "../inc/IStreamWriter.h"
 #include "../inc/ThreadPool.h"
 
+#include <map>
+
 namespace bulk {
 
 /**
@@ -22,8 +24,16 @@ class FileWriter : public IStreamWriter, public ThreadPool<2> {
      */
     void write(const std::time_t& time, const std::vector<std::string>& bulk) final;
 
+    /**
+     * @brief Дать метрики работы потоков.
+     * @return метрики по каждому из потоков.
+     */
+    std::map<std::thread::id, Metrics> get_metrics() final;
+
   private:
-    uint8_t cnt_;
+
+    std::mutex metrics_guard_;
+    std::map<std::thread::id, Metrics> threads_metrics_;
 };
 
 } // namespace bulk.

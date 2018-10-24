@@ -21,7 +21,7 @@ class ThreadPool {
     /**
     * @brief Конструктор пула потоков.
     */
-    ThreadPool() : stop_{false} {
+    ThreadPool() : stop_{false}, job_id_{0} {
       start();
     }
 
@@ -72,6 +72,13 @@ class ThreadPool {
       return func_ptr->get_future();
     }
 
+    /**
+     * @brief Дать id текущей выполняемой задачи.
+     * @return id текущей выполняемой задачи.
+     */
+    unsigned char get_job_id() {
+      return job_id_;
+    }
 
   private:
 
@@ -90,6 +97,7 @@ class ThreadPool {
                 return;
               task = std::move(jobs_.front());
               jobs_.pop();
+              job_id_++;
             }
             task();
           }
@@ -98,7 +106,8 @@ class ThreadPool {
     }
 
 
-    bool                              stop_;
+    std::atomic_bool                  stop_;
+    std::atomic_uchar                 job_id_;
     std::mutex                        job_mutex_;
     std::condition_variable           job_avail_;
     std::queue<std::function<void()>> jobs_;
