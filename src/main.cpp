@@ -58,7 +58,15 @@ int main(int argc, char const *argv[])
   cmd_processor.subscribe(console_writer);
   cmd_processor.subscribe(file_writer);
 
+  console_writer->start();
+  file_writer->start();
+
   cmd_processor.process(ss);
+
+  console_writer->stop();
+  file_writer->stop();
+
+  cmd_processor.print_metrics(std::cout);
 
   cmd_processor.unsubscribe(console_writer);
   cmd_processor.unsubscribe(file_writer);

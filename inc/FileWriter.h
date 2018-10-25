@@ -33,7 +33,7 @@ class FileWriter : public IStreamWriter, public ThreadPool<2> {
 
   private:
 
-    std::mutex metrics_guard_;
+    std::mutex metrics_mutex_{};
     Metrics metrics_;
 };
 

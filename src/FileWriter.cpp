@@ -15,13 +15,13 @@ void FileWriter::write(const Bulk& bulk) {
     }
 
     // Добавление метрики.
-    std::lock_guard<std::mutex> lock(metrics_guard_);
+    std::lock_guard<std::mutex> lock(metrics_mutex_);
     metrics_.push(std::this_thread::get_id(), bulk);
   });
 }
 
 Metrics& FileWriter::get_metrics() {
-  std::lock_guard<std::mutex> lock(metrics_guard_);
+  std::lock_guard<std::mutex> lock(metrics_mutex_);
   return metrics_;
 }
 

@@ -43,15 +43,6 @@ void CmdProcessor::process(std::istream& is) {
       rows = 0;
     }
   }
-
-  std::this_thread::sleep_for(std::chrono::seconds(1));
-  std::cout << metrics_;
-  for(auto& it: observers_) {
-    if(!it.expired()) {
-      auto p = it.lock();
-      std::cout << p->get_metrics();
-    }
-  }
 }
 
 void CmdProcessor::publish(const Bulk& bulk) {
@@ -62,5 +53,15 @@ void CmdProcessor::publish(const Bulk& bulk) {
     }
   }
 };
+
+void CmdProcessor::print_metrics(std::ostream& os) {
+  os << metrics_;
+  for(auto& it: observers_) {
+    if(!it.expired()) {
+      auto p = it.lock();
+      os << p->get_metrics();
+    }
+  }
+}
 
 } // namespace bulk.

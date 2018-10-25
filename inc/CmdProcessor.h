@@ -43,15 +43,22 @@ class CmdProcessor : public IObservable  {
      */
     void process(std::istream& is);
 
+    /**
+     * @brief Вывод метрик в поток.
+     * @param os - выходной поток.
+     */
+    void print_metrics(std::ostream& os);
+
   private:
     /// Тип обозревателя.
     using observer_t = std::weak_ptr<IStreamWriter>;
 
     /**
-     * @brief Вывод блока команд.
+     * @brief Публикация блока команд.
      * @param bulk - блок команд.
      */
     void publish(const Bulk& bulk) final;
+
 
     /// Список обозревателей, ожидающих вывод содержимого пула.
     std::list<observer_t> observers_{};

@@ -39,7 +39,7 @@ class ConsoleWriter : public IStreamWriter, public ThreadPool<> {
 
   private:
     std::ostream& os_;
-    std::mutex metrics_guard_{};
+    std::mutex metrics_mutex_{};
     Metrics metrics_;
 };
 

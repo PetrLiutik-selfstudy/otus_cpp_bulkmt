@@ -26,7 +26,7 @@ class IObservable {
     virtual void unsubscribe(const std::shared_ptr<IStreamWriter>& observer) = 0;
 
     /**
-     * @brief Вывод блока команд.
+     * @brief Публикация блока команд.
      * @param bulk - блок команд.
      */
     virtual void publish(const Bulk& bulk) = 0;

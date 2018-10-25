@@ -22,7 +22,6 @@ class ThreadPool {
     * @brief Конструктор пула потоков.
     */
     ThreadPool() : stop_{false}, job_id_{0} {
-      start();
     }
 
     ThreadPool(const ThreadPool&) = delete;
@@ -32,6 +31,29 @@ class ThreadPool {
     ThreadPool& operator = (const ThreadPool&) = delete;
 
     ThreadPool& operator = (ThreadPool&&) = delete;
+
+    /**
+     * @brief Запуск всех потоков пула.
+     */
+    void start() {
+      for(auto i = 0; i < N; ++i) {
+        threads_[i] = std::thread([this] {
+          for(;;) {
+            std::function<void()> task;
+            {
+              std::unique_lock<std::mutex> lock(job_mutex_);
+              job_avail_.wait(lock, [this]{ return stop_ || !jobs_.empty(); });
+              if(stop_ && jobs_.empty())
+                return;
+              task = std::move(jobs_.front());
+              jobs_.pop();
+              job_id_++;
+            }
+            task();
+          }
+        });
+      }
+    }
 
     /**
      * @brief Завершение работы всех потоков пула.
@@ -82,36 +104,12 @@ class ThreadPool {
 
   private:
 
-    /**
-     * @brief Запуск всех потоков пула.
-     */
-    void start() {
-      for(auto i = 0; i < N; ++i) {
-        threads_[i] = std::thread([this] {
-          for(;;) {
-            std::function<void()> task;
-            {
-              std::unique_lock<std::mutex> lock(job_mutex_);
-              job_avail_.wait(lock, [this]{ return stop_ || !jobs_.empty(); });
-              if(stop_ && jobs_.empty())
-                return;
-              task = std::move(jobs_.front());
-              jobs_.pop();
-              job_id_++;
-            }
-            task();
-          }
-        });
-      }
-    }
-
-
-    std::atomic_bool                  stop_;
-    std::atomic_uchar                 job_id_;
-    std::mutex                        job_mutex_;
-    std::condition_variable           job_avail_;
-    std::queue<std::function<void()>> jobs_;
-    std::array<std::thread, N>        threads_;
+    std::atomic_bool                  stop_{};
+    std::atomic_uchar                 job_id_{};
+    std::mutex                        job_mutex_{};
+    std::condition_variable           job_avail_{};
+    std::queue<std::function<void()>> jobs_{};
+    std::array<std::thread, N>        threads_{};
 };
 
 } // namespace bulk.
