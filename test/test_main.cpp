@@ -31,6 +31,7 @@ class TestWriter : public IStreamWriter {
     void write(const Bulk& bulk) final {
       bulk_pool_ = bulk.get_cmds();
       time_ = bulk.time();
+      metrics_.push(std::this_thread::get_id(), bulk);
     }
 
     auto get_bulk() {
@@ -41,9 +42,14 @@ class TestWriter : public IStreamWriter {
       return time_;
     }
 
+    Metrics& get_metrics() final {
+      return metrics_;
+    }
+
   private:
     std::vector<std::string> bulk_pool_{};
     std::time_t time_{};
+    Metrics metrics_{"test"};
 };
 
 } // namespace bulk.
