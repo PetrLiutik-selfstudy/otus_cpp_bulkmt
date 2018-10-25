@@ -1,22 +1,20 @@
 ﻿cmake_minimum_required(VERSION 3.2)
 
+project(bulkmt_tst)
+
 # Setup testing
 enable_testing()
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIR})
 
 add_executable(${PROJECT_NAME} test_main.cpp
-                               ../src/BulkPool.cpp
+                               ../src/Bulk.cpp
                                ../src/CmdInterpreter.cpp
                                ../src/CmdProcessor.cpp
-                               ../src/ConsoleWriter.cpp
-                               ../src/FileWriter.cpp
                                ../src/ver.cpp
-                               ../inc/BulkPool.h
+                               ../inc/Bulk.h
                                ../inc/CmdInterpreter.h
                                ../inc/CmdProcessor.h
-                               ../inc/ConsoleWriter.h
-                               ../inc/FileWriter.h
                                ../inc/IObservable.h
                                ../inc/IStreamWriter.h
                                ../inc/ver.h)

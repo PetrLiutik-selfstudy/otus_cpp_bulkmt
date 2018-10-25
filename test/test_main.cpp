@@ -1,8 +1,8 @@
 #include "gtest/gtest.h"
-#include "../inc/ver.h"
-#include "../inc/CmdProcessor.h"
-#include "../inc/ConsoleWriter.h"
-#include "../inc/FileWriter.h"
+#include "ver.h"
+#include "CmdProcessor.h"
+#include "ConsoleWriter.h"
+#include "FileWriter.h"
 
 #include <vector>
 #include <string>
@@ -220,18 +220,6 @@ TEST(cmd_processor_test_case, eof_bulk_test) {
   std::vector<std::string> result{"cmd7", "cmd8"};
   EXPECT_EQ(test_writer->get_bulk(), result);
   EXPECT_NE(test_writer->get_time(), std::time_t{});
-}
-
-TEST(console_writer_test_case, write_test) {
-  std::stringstream ss;
-  auto console_writer = std::make_shared<bulk::ConsoleWriter>(ss);
-  std::time_t time{};
-  std::vector<std::string> bulk{"cmd1", "cmd2", "cmd3"};
-  console_writer->write(time, bulk);
-  std::cout << ss.str() << std::endl;
-
-  std::string result{"bulk: cmd1, cmd2, cmd3\n"};
-  EXPECT_EQ(ss.str(), result);
 }
 
 int main(int argc, char *argv[]) {
