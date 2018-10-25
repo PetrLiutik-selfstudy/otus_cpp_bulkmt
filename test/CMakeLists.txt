@@ -5,7 +5,7 @@ project(bulkmt_tst)
 # Setup testing
 enable_testing()
 find_package(GTest REQUIRED)
-include_directories(${GTEST_INCLUDE_DIR})
+target_include_directories(${PROJECT_NAME} PRIVATE ${GTEST_INCLUDE_DIR} ${CMAKE_SOURCE_DIR}/inc)
 
 add_executable(${PROJECT_NAME} test_main.cpp
                                ../src/Bulk.cpp
