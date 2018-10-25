@@ -1,11 +1,8 @@
 ﻿cmake_minimum_required(VERSION 3.2)
 
-project(bulkmt_tst)
-
 # Setup testing
 enable_testing()
 find_package(GTest REQUIRED)
-target_include_directories(${PROJECT_NAME} PRIVATE ${GTEST_INCLUDE_DIR} ${CMAKE_SOURCE_DIR}/inc)
 
 add_executable(${PROJECT_NAME} test_main.cpp
                                ../src/Bulk.cpp
@@ -20,6 +17,8 @@ add_executable(${PROJECT_NAME} test_main.cpp
                                ../inc/IStreamWriter.h
                                ../inc/Metrics.h
                                ../inc/ver.h)
+
+target_include_directories(${PROJECT_NAME} PRIVATE ${GTEST_INCLUDE_DIR} ${CMAKE_SOURCE_DIR}/inc)
 
 set_target_properties(${PROJECT_NAME}  ${PROJECT_NAME} PROPERTIES
   CXX_STANDARD 14
