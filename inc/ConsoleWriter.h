@@ -27,10 +27,9 @@ class ConsoleWriter : public IStreamWriter, public ThreadPool<> {
 
     /**
      * @brief Запись блока команд в поток.
-     * @param time - время начала блока команд.
      * @param bulk - блок команд.
      */
-    void write(const std::time_t& time, const std::vector<std::string>& bulk) final;
+    void write(const Bulk& bulk) final;
 
     /**
      * @brief Дать метрики работы потоков.

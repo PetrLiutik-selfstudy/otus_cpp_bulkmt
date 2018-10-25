@@ -5,12 +5,9 @@
 
 namespace bulk {
 
-void ConsoleWriter::write(const std::time_t&, const std::vector<std::string>& bulk) {
+void ConsoleWriter::write(const Bulk& bulk) {
   add_job([this, bulk](){
-    os_ << "bulk: ";
-    for(const auto &it : bulk) {
-      os_ << it << (&it != &bulk.back() ? ", " : "\n");
-    }
+    os_ << bulk;
 
     // Добавление метрики.
     std::lock_guard<std::mutex> lock(metrics_guard_);

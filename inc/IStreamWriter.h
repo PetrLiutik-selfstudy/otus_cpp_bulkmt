@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include "../inc/Bulk.h"
+
 #include <ctime>
 #include <string>
 #include <vector>
@@ -43,10 +45,9 @@ class IStreamWriter {
 
     /**
      * @brief Запись блока команд в поток.
-     * @param time - время начала блока команд.
      * @param bulk - блок команд.
      */
-    virtual void write(const std::time_t& time, const std::vector<std::string>& bulk) = 0;
+    virtual void write(const Bulk& bulk) = 0;
 
     /**
      * @brief Дать метрики работы потоков.

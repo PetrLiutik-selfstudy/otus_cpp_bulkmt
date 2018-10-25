@@ -10,7 +10,7 @@ namespace bulk {
 /**
  * @brief Класс вывода блока команд в файл.
  */
-class FileWriter : public IStreamWriter, public ThreadPool<2> {
+class FileWriter : public IStreamWriter, public ThreadPool<4> {
   public:
     FileWriter() = default;
     ~FileWriter() override {
@@ -19,10 +19,9 @@ class FileWriter : public IStreamWriter, public ThreadPool<2> {
 
     /**
      * @brief Запись блока команд в поток.
-     * @param time - время начала блока команд.
      * @param bulk - блок команд.
      */
-    void write(const std::time_t& time, const std::vector<std::string>& bulk) final;
+    void write(const Bulk& bulk) final;
 
     /**
      * @brief Дать метрики работы потоков.

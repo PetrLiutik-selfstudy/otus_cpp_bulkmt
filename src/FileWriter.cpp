@@ -4,16 +4,13 @@
 
 namespace bulk {
 
-void FileWriter::write(const std::time_t& time, const std::vector<std::string>& bulk) {
-  add_job([this, time, bulk](){
-    std::string file_name = "bulk" + std::to_string(time) + "_" + std::to_string(get_job_id()) + ".log";
+void FileWriter::write(const Bulk& bulk) {
+  add_job([this, bulk](){
+    std::string file_name = "bulk" + std::to_string(bulk.time()) + "_" + std::to_string(get_job_id()) + ".log";
     std::fstream fs{file_name, std::ios::app};
 
     if(fs.is_open()) {
-      fs << "ThreadId: " << std::this_thread::get_id() << " bulk: ";
-      for(const auto& it : bulk) {
-        fs << it << (&it != &bulk.back() ? ", " : "\n");
-      }
+      fs << "ThreadId: " << std::this_thread::get_id() << bulk;
       fs.close();
     }
 

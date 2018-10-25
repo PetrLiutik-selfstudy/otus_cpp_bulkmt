@@ -6,16 +6,15 @@ else ()
     project(bulkmt VERSION 1.1.1)
 endif ()
 
-
 # Setup application
 add_executable(${PROJECT_NAME} main.cpp
                                ver.cpp
-                               BulkPool.cpp
+                               Bulk.cpp
                                CmdInterpreter.cpp
                                CmdProcessor.cpp
                                ConsoleWriter.cpp
                                FileWriter.cpp
-                               ../inc/BulkPool.h
+                               ../inc/Bulk.h
                                ../inc/CmdInterpreter.h
                                ../inc/CmdProcessor.h
                                ../inc/ConsoleWriter.h
@@ -30,7 +29,7 @@ configure_file(version.h.in ${PROJECT_SOURCE_DIR}/version.h)
 set_target_properties(${PROJECT_NAME} PROPERTIES
   CXX_STANDARD 14
   CXX_STANDARD_REQUIRED ON
-  COMPILE_OPTIONS -Wpedantic -Wall -Wextra
+  #COMPILE_OPTIONS -Wpedantic -Wall -Wextra
 )
 
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)

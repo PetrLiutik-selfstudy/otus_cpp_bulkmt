@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "../inc/BulkPool.h"
+#include "../inc/Bulk.h"
 #include "../inc/CmdInterpreter.h"
 #include "../inc/IObservable.h"
 
@@ -45,25 +45,17 @@ class CmdProcessor : public IObservable  {
   private:
     /// Тип обозревателя.
     using observer_t = std::weak_ptr<IStreamWriter>;
-    /// Тип коллбека для вывода содержимого пула.
-    using publish_t = std::function<void(const std::time_t& bulk_time,
-                                         const std::vector<std::string>& cmds)>;
 
-    /// Коллбек для вывода содержимого пула.
-    publish_t publish = [&](const std::time_t& bulk_time,
-                            const std::vector<std::string>& bulk) {
-      for(auto& it: observers_) {
-        if(!it.expired()) {
-          auto p = it.lock();
-          p->write(bulk_time, bulk);
-        }
-      }
-    };
+    /**
+     * @brief Вывод блока команд.
+     * @param bulk - блок команд.
+     */
+    void publish(const Bulk& bulk) final;
 
     /// Список обозревателей, ожидающих вывод содержимого пула.
     std::list<observer_t> observers_{};
-    /// Пул блоков команд.
-    BulkPool bulk_pool_{};
+    /// Блок команд.
+    Bulk bulk_{};
     /// Интерпретатор команд.
     CmdInterpreter interpreter_;
 };
