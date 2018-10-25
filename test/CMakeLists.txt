@@ -18,7 +18,7 @@ add_executable(${PROJECT_NAME} test_main.cpp
                                ../inc/Metrics.h
                                ../inc/ver.h)
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${GTEST_INCLUDE_DIR} ${CMAKE_SOURCE_DIR}/inc)
+target_include_directories(${PROJECT_NAME} PRIVATE ${GTEST_INCLUDE_DIR} ${CMAKE_SOURCE_DIR}/inc ${PROJECT_SOURCE_DIR}/src)
 
 set_target_properties(${PROJECT_NAME}  ${PROJECT_NAME} PROPERTIES
   CXX_STANDARD 14

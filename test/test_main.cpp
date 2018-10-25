@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
-#include "ver.h"
-#include "CmdProcessor.h"
+#include "../inc/ver.h"
+#include "../inc/CmdProcessor.h"
 
 #include <vector>
 #include <string>
