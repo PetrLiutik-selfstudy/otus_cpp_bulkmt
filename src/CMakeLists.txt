@@ -6,25 +6,12 @@ else ()
     project(bulkmt VERSION 1.1.1)
 endif ()
 
+find_package (Threads REQUIRED)
+
+file(GLOB_RECURSE SOURCES *.cpp *.h)
+
 # Setup application
-add_executable(${PROJECT_NAME} main.cpp
-                               ver.cpp
-                               Bulk.cpp
-                               CmdInterpreter.cpp
-                               CmdProcessor.cpp
-                               ConsoleWriter.cpp
-                               Metrics.cpp
-                               FileWriter.cpp
-                               ../inc/Bulk.h
-                               ../inc/CmdInterpreter.h
-                               ../inc/CmdProcessor.h
-                               ../inc/ConsoleWriter.h
-                               ../inc/FileWriter.h
-                               ../inc/IObservable.h
-                               ../inc/IStreamWriter.h
-                               ../inc/Metrics.h
-                               ../inc/ThreadPool.h
-                               ../inc/ver.h)
+add_executable(${PROJECT_NAME} ${SOURCES})
 
 configure_file(version.h.in ${PROJECT_SOURCE_DIR}/version.h)
 

@@ -1,9 +1,7 @@
 ﻿#pragma once
 
-#include "../inc/IStreamWriter.h"
-#include "../inc/ThreadPool.h"
-
-#include <map>
+#include "IStreamWriter.h"
+#include "ThreadPool.h"
 
 namespace bulk {
 

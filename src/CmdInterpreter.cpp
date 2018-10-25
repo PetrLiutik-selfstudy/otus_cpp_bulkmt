@@ -1,4 +1,4 @@
-﻿#include "../inc/CmdInterpreter.h"
+﻿#include "CmdInterpreter.h"
 
 namespace bulk {
 

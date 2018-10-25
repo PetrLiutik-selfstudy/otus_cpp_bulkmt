@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "../inc/Bulk.h"
+#include "Bulk.h"
 
 #include <ostream>
 #include <string>

@@ -1,9 +1,9 @@
 ﻿#pragma once
 
-#include "../inc/Bulk.h"
-#include "../inc/CmdInterpreter.h"
-#include "../inc/IObservable.h"
-#include "../inc/Metrics.h"
+#include "Bulk.h"
+#include "CmdInterpreter.h"
+#include "IObservable.h"
+#include "Metrics.h"
 
 #include <functional>
 #include <list>

@@ -18,18 +18,14 @@ namespace bulk {
 template <size_t N = 1>
 class ThreadPool {
   public:
-    /**
-    * @brief Конструктор пула потоков.
-    */
-    ThreadPool() : stop_{false}, job_id_{0} {
-    }
+    explicit ThreadPool() = default;
 
     ThreadPool(const ThreadPool&) = delete;
-
     ThreadPool(ThreadPool&&) = delete;
 
-    ThreadPool& operator = (const ThreadPool&) = delete;
+    ~ThreadPool() = default;
 
+    ThreadPool& operator = (const ThreadPool&) = delete;
     ThreadPool& operator = (ThreadPool&&) = delete;
 
     /**

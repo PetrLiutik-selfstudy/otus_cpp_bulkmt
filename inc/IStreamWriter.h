@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-#include "../inc/Bulk.h"
-#include "../inc/Metrics.h"
+#include "Bulk.h"
+#include "Metrics.h"
 
 #include <ctime>
 #include <string>

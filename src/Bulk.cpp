@@ -1,4 +1,4 @@
-﻿#include "../inc/Bulk.h"
+﻿#include "Bulk.h"
 
 namespace bulk {
 

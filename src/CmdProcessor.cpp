@@ -1,4 +1,4 @@
-﻿#include "../inc/CmdProcessor.h"
+﻿#include "CmdProcessor.h"
 
 #include <algorithm>
 #include <istream>
@@ -52,7 +52,7 @@ void CmdProcessor::publish(const Bulk& bulk) {
       p->write(bulk);
     }
   }
-};
+}
 
 void CmdProcessor::print_metrics(std::ostream& os) {
   os << metrics_;

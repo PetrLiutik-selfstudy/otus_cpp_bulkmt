@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "../inc/IStreamWriter.h"
+#include "IStreamWriter.h"
 
 #include<memory>
 
