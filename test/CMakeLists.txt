@@ -11,12 +11,14 @@ add_executable(${PROJECT_NAME} test_main.cpp
                                ../src/Bulk.cpp
                                ../src/CmdInterpreter.cpp
                                ../src/CmdProcessor.cpp
+                               ../src/Metrics.cpp
                                ../src/ver.cpp
                                ../inc/Bulk.h
                                ../inc/CmdInterpreter.h
                                ../inc/CmdProcessor.h
                                ../inc/IObservable.h
                                ../inc/IStreamWriter.h
+                               ../inc/Metrics.h
                                ../inc/ver.h)
 
 set_target_properties(${PROJECT_NAME}  ${PROJECT_NAME} PROPERTIES
@@ -33,4 +35,3 @@ target_link_libraries(${PROJECT_NAME} gtest pthread )
 
 add_test(ver_test_case ${PROJECT_NAME})
 add_test(cmd_processor_test_case ${PROJECT_NAME})
-add_test(console_writer_test_case ${PROJECT_NAME})

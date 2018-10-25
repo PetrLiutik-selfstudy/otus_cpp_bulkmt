@@ -1,8 +1,6 @@
 #include "gtest/gtest.h"
 #include "ver.h"
 #include "CmdProcessor.h"
-#include "ConsoleWriter.h"
-#include "FileWriter.h"
 
 #include <vector>
 #include <string>
@@ -30,13 +28,13 @@ class TestWriter : public IStreamWriter {
     TestWriter() = default;
     ~TestWriter() override = default;
 
-    void write(const std::time_t& time, const std::vector<std::string>& bulk) final {
-      bulk_ = bulk;
-      time_ = time;
+    void write(const Bulk& bulk) final {
+      bulk_pool_ = bulk.get_cmds();
+      time_ = bulk.time();
     }
 
     auto get_bulk() {
-      return bulk_;
+      return bulk_pool_;
     }
 
     auto get_time() {
@@ -44,7 +42,7 @@ class TestWriter : public IStreamWriter {
     }
 
   private:
-    std::vector<std::string> bulk_{};
+    std::vector<std::string> bulk_pool_{};
     std::time_t time_{};
 };
 

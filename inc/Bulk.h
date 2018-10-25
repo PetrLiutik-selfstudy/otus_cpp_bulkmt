@@ -33,6 +33,12 @@ class Bulk {
     size_t size() const;
 
     /**
+     * @brief Дать все команды блока.
+     * @return команды блока.
+     */
+    std::vector<std::string> get_cmds() const;
+
+    /**
      * @brief Дать время начала формирования блока команд.
      * @return время начала формирования блока команд.
      */

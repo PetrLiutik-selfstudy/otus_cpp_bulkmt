@@ -18,6 +18,10 @@ size_t Bulk::size() const {
   return pool_.size();
 }
 
+std::vector<std::string> Bulk::get_cmds() const {
+  return pool_;
+}
+
 std::time_t Bulk::time() const {
   return time_;
 }
