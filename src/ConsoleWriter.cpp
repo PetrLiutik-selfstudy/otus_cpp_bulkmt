@@ -11,13 +11,13 @@ void ConsoleWriter::write(const Bulk& bulk) {
 
     // Добавление метрики.
     std::lock_guard<std::mutex> lock(metrics_guard_);
-    threads_metrics_[std::this_thread::get_id()] += {1, bulk.size()};
+    metrics_.push(std::this_thread::get_id(), bulk);
   });
 }
 
-std::map<std::thread::id, Metrics> ConsoleWriter::get_metrics() {
+Metrics& ConsoleWriter::get_metrics() {
   std::lock_guard<std::mutex> lock(metrics_guard_);
-  return threads_metrics_;
+  return metrics_;
 }
 
 } // namespace bulk.

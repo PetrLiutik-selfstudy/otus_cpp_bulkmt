@@ -13,6 +13,7 @@ add_executable(${PROJECT_NAME} main.cpp
                                CmdInterpreter.cpp
                                CmdProcessor.cpp
                                ConsoleWriter.cpp
+                               Metrics.cpp
                                FileWriter.cpp
                                ../inc/Bulk.h
                                ../inc/CmdInterpreter.h
@@ -21,6 +22,7 @@ add_executable(${PROJECT_NAME} main.cpp
                                ../inc/FileWriter.h
                                ../inc/IObservable.h
                                ../inc/IStreamWriter.h
+                               ../inc/Metrics.h
                                ../inc/ThreadPool.h
                                ../inc/ver.h)
 

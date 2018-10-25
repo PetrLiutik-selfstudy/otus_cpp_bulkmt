@@ -10,9 +10,11 @@ namespace bulk {
 /**
  * @brief Класс вывода блока команд в файл.
  */
-class FileWriter : public IStreamWriter, public ThreadPool<4> {
+class FileWriter : public IStreamWriter, public ThreadPool<2> {
   public:
-    FileWriter() = default;
+    explicit FileWriter() : metrics_{"file"} {
+    }
+
     ~FileWriter() override {
       stop();
     }
@@ -27,12 +29,12 @@ class FileWriter : public IStreamWriter, public ThreadPool<4> {
      * @brief Дать метрики работы потоков.
      * @return метрики по каждому из потоков.
      */
-    std::map<std::thread::id, Metrics> get_metrics() final;
+    Metrics& get_metrics() final;
 
   private:
 
     std::mutex metrics_guard_;
-    std::map<std::thread::id, Metrics> threads_metrics_;
+    Metrics metrics_;
 };
 
 } // namespace bulk.

@@ -10,19 +10,19 @@ void FileWriter::write(const Bulk& bulk) {
     std::fstream fs{file_name, std::ios::app};
 
     if(fs.is_open()) {
-      fs << "ThreadId: " << std::this_thread::get_id() << bulk;
+      fs << bulk;
       fs.close();
     }
 
     // Добавление метрики.
     std::lock_guard<std::mutex> lock(metrics_guard_);
-    threads_metrics_[std::this_thread::get_id()] += {1, bulk.size()};
+    metrics_.push(std::this_thread::get_id(), bulk);
   });
 }
 
-std::map<std::thread::id, Metrics> FileWriter::get_metrics() {
+Metrics& FileWriter::get_metrics() {
   std::lock_guard<std::mutex> lock(metrics_guard_);
-  return threads_metrics_;
+  return metrics_;
 }
 
 

@@ -18,7 +18,7 @@ class ConsoleWriter : public IStreamWriter, public ThreadPool<> {
      * @brief Консруктор.
      * @param os - поток для вывода.
      */
-    explicit ConsoleWriter(std::ostream& os = std::cout) : os_(os) {
+    explicit ConsoleWriter(std::ostream& os = std::cout) : os_(os), metrics_{"log"} {
     }
 
     ~ConsoleWriter() override {
@@ -35,12 +35,12 @@ class ConsoleWriter : public IStreamWriter, public ThreadPool<> {
      * @brief Дать метрики работы потоков.
      * @return метрики по каждому из потоков.
      */
-    std::map<std::thread::id, Metrics> get_metrics() final;
+    Metrics& get_metrics() final;
 
   private:
     std::ostream& os_;
-    std::mutex metrics_guard_;
-    std::map<std::thread::id, Metrics> threads_metrics_;
+    std::mutex metrics_guard_{};
+    Metrics metrics_;
 };
 
 } // namespace bulk.

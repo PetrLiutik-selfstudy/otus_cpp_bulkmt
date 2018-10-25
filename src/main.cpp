@@ -12,7 +12,7 @@
 
 int main(int argc, char const *argv[])
 {
-  std::cout << "bulk version: "
+  std::cout << "bulkmt version: "
             << ver_major() << "."
             << ver_minor() << "."
             << ver_patch() << std::endl;
@@ -52,11 +52,11 @@ int main(int argc, char const *argv[])
 
   bulk::CmdProcessor cmd_processor(static_cast<size_t>(bulk_size));
 
-  auto file_writer = std::make_shared<bulk::FileWriter>();
   auto console_writer = std::make_shared<bulk::ConsoleWriter>();
+  auto file_writer = std::make_shared<bulk::FileWriter>();
 
-  cmd_processor.subscribe(file_writer);
   cmd_processor.subscribe(console_writer);
+  cmd_processor.subscribe(file_writer);
 
   cmd_processor.process(ss);
 

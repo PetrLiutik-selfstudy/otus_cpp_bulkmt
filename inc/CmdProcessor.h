@@ -3,6 +3,7 @@
 #include "../inc/Bulk.h"
 #include "../inc/CmdInterpreter.h"
 #include "../inc/IObservable.h"
+#include "../inc/Metrics.h"
 
 #include <functional>
 #include <list>
@@ -19,7 +20,7 @@ class CmdProcessor : public IObservable  {
      * @brief Конструктор.
      * @param bulk_size - макисмальный размер блока команд.
      */
-    explicit CmdProcessor(size_t bulk_size) : interpreter_{bulk_size} {
+    explicit CmdProcessor(size_t bulk_size) : interpreter_{bulk_size}, metrics_{"main"} {
     }
 
     ~CmdProcessor() override = default;
@@ -58,6 +59,8 @@ class CmdProcessor : public IObservable  {
     Bulk bulk_{};
     /// Интерпретатор команд.
     CmdInterpreter interpreter_;
+    /// Метрики основного потока.
+    Metrics metrics_;
 };
 
 } // namespace bulk.

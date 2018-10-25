@@ -26,27 +26,30 @@ void CmdProcessor::unsubscribe(const std::shared_ptr<IStreamWriter>& observer) {
 }
 
 void CmdProcessor::process(std::istream& is) {
+  size_t rows{};
   for(bool is_eof = false; !is_eof;) {
     std::string input;
     is_eof = !std::getline(is, input);
+    if(!is_eof)
+      rows++;
 
     std::string cmd;
     bool is_bulk_end = interpreter_.interpret(input, cmd);
     bulk_.push(cmd);
     if(is_bulk_end) {
+      metrics_.push(std::this_thread::get_id(), bulk_, rows);
       publish(bulk_);
       bulk_.clear();
+      rows = 0;
     }
   }
 
   std::this_thread::sleep_for(std::chrono::seconds(1));
+  std::cout << metrics_;
   for(auto& it: observers_) {
     if(!it.expired()) {
       auto p = it.lock();
-      auto metrics = p->get_metrics();
-      for(auto metric: metrics) {
-        std::cout << "Thread: " << metric.first << " blocks: " << metric.second.get_bloks() << " commands: " << metric.second.get_commands_() << std::endl;
-      }
+      std::cout << p->get_metrics();
     }
   }
 }
