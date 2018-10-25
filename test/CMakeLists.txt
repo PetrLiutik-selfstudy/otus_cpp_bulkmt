@@ -5,18 +5,18 @@ enable_testing()
 find_package(GTest REQUIRED)
 
 add_executable(${PROJECT_NAME} test_main.cpp
-                               ../src/Bulk.cpp
-                               ../src/CmdInterpreter.cpp
-                               ../src/CmdProcessor.cpp
-                               ../src/Metrics.cpp
-                               ../src/ver.cpp
-                               ../inc/Bulk.h
-                               ../inc/CmdInterpreter.h
-                               ../inc/CmdProcessor.h
-                               ../inc/IObservable.h
-                               ../inc/IStreamWriter.h
-                               ../inc/Metrics.h
-                               ../inc/ver.h)
+                               ${CMAKE_SOURCE_DIR}/src/Bulk.cpp
+                               ${CMAKE_SOURCE_DIR}/src/CmdInterpreter.cpp
+                               ${CMAKE_SOURCE_DIR}/src/CmdProcessor.cpp
+                               ${CMAKE_SOURCE_DIR}/src/Metrics.cpp
+                               ${CMAKE_SOURCE_DIR}/src/ver.cpp
+                               ${CMAKE_SOURCE_DIR}/inc/Bulk.h
+                               ${CMAKE_SOURCE_DIR}/inc/CmdInterpreter.h
+                               ${CMAKE_SOURCE_DIR}/inc/CmdProcessor.h
+                               ${CMAKE_SOURCE_DIR}/inc/IObservable.h
+                               ${CMAKE_SOURCE_DIR}/inc/IStreamWriter.h
+                               ${CMAKE_SOURCE_DIR}/inc/Metrics.h
+                               ${CMAKE_SOURCE_DIR}/inc/ver.h)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${GTEST_INCLUDE_DIR} ${CMAKE_SOURCE_DIR})
 
