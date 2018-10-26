@@ -1,0 +1,12 @@
+<map id="inc/Metrics.h" name="inc/Metrics.h">
+<area shape="rect" id="node2" href="$IStreamWriter_8h.html" title="inc/IStreamWriter.h" alt="" coords="174,80,308,107"/>
+<area shape="rect" id="node4" href="$CmdProcessor_8h.html" title="inc/CmdProcessor.h" alt="" coords="25,229,165,256"/>
+<area shape="rect" id="node11" href="$Metrics_8cpp.html" title="src/Metrics.cpp" alt="" coords="333,80,444,107"/>
+<area shape="rect" id="node3" href="$IObservable_8h.html" title="inc/IObservable.h" alt="" coords="99,155,223,181"/>
+<area shape="rect" id="node7" href="$ConsoleWriter_8h.html" title="inc/ConsoleWriter.h" alt="" coords="247,155,384,181"/>
+<area shape="rect" id="node9" href="$FileWriter_8h.html" title="inc/FileWriter.h" alt="" coords="409,155,519,181"/>
+<area shape="rect" id="node5" href="$CmdProcessor_8cpp.html" title="src/CmdProcessor.cpp" alt="" coords="5,304,160,331"/>
+<area shape="rect" id="node6" href="$main_8cpp.html" title="src/main.cpp" alt="" coords="185,304,281,331"/>
+<area shape="rect" id="node8" href="$ConsoleWriter_8cpp.html" title="src/ConsoleWriter.cpp" alt="" coords="257,229,409,256"/>
+<area shape="rect" id="node10" href="$FileWriter_8cpp.html" title="src/FileWriter.cpp" alt="" coords="484,229,609,256"/>
+</map>
