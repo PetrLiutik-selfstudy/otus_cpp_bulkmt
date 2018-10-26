@@ -44,3 +44,4 @@ enable_testing()
 
 add_test(ver_test_case tests)
 add_test(cmd_processor_test_case tests)
+add_test(bulk_test_case tests)

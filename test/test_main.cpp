@@ -226,6 +226,51 @@ TEST(cmd_processor_test_case, eof_bulk_test) {
   EXPECT_NE(test_writer->get_time(), std::time_t{});
 }
 
+TEST(cmd_processor_test_case, metrics_test) {
+  bulk::CmdProcessor cmd_processor{3};
+  auto test_writer = std::make_shared<bulk::TestWriter>();
+  cmd_processor.subscribe(test_writer);
+
+  std::stringstream ss;
+  ss << "cmd1" << std::endl;
+  ss << "cmd2" << std::endl;
+  ss << "{" << std::endl;
+  ss << "cmd3" << std::endl;
+  ss << "cmd4" << std::endl;
+  ss << "cmd5" << std::endl;
+  ss << "cmd6" << std::endl;
+  ss << "}" << std::endl;
+  ss << "cmd7" << std::endl;
+  ss << "cmd8" << std::endl;
+
+  cmd_processor.process(ss);
+
+  std::stringstream ss1;
+  ss1 << "test";
+  ss1 << " thread_id " << std::this_thread::get_id() << " - ";
+  ss1 << 3 << " bulk(s), ";
+  ss1 << 8 << " command(s) " << std::endl;
+
+  std::stringstream ss2;
+  ss2 << test_writer->get_metrics();
+
+  EXPECT_EQ(ss1.str(), ss2.str());
+}
+
+TEST(bulk_test_case, print_bulk_test) {
+  bulk::Bulk bulk;
+  bulk.push("cmd1");
+  bulk.push("cmd2");
+  bulk.push("cmd3");
+
+  std::stringstream ss;
+  ss << bulk;
+
+  std::string result{"bulk: cmd1, cmd2, cmd3\n"};
+
+  EXPECT_EQ(ss.str(), result);
+}
+
 int main(int argc, char *argv[]) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
